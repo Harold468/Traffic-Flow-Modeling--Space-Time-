@@ -1,0 +1,4 @@
+venv/
+*.rar
+output.csv
+*.xlxs

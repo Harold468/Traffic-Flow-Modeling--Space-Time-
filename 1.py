@@ -121,71 +121,71 @@ if results:
     final_df.to_csv('output_with_empty_rows.csv', index=False)
     print("\nSuccess! File saved as 'output_with_empty_rows.csv'")
     # NEW CODE: Create a plot using only Q and Density columns with unique pairs
-    try:
-        # Select only the two columns we need
-        plot_df = final_df[['Q (veh/h)', 'Density']].copy()
+    # try:
+    #     # Select only the two columns we need
+    #     plot_df = final_df[['Q (veh/h)', 'Density']].copy()
         
-        # Remove rows where either column is NaN
-        plot_df = plot_df.dropna()
+    #     # Remove rows where either column is NaN
+    #     plot_df = plot_df.dropna()
         
-        # Remove duplicate (Q, Density) pairs
-        plot_df = plot_df.drop_duplicates()
+    #     # Remove duplicate (Q, Density) pairs
+    #     plot_df = plot_df.drop_duplicates()
         
-        # Only proceed if we have at least 2 unique points
-        if len(plot_df) >= 2:
-            plt.figure(figsize=(14, 8))
+    #     # Only proceed if we have at least 2 unique points
+    #     if len(plot_df) >= 2:
+    #         plt.figure(figsize=(14, 8))
             
-            # Create scatter plot
-            plt.scatter(
-                x=plot_df['Density'],
-                y=plot_df['Q (veh/h)'],
-                s=100,
-                alpha=0.7,
-                edgecolor='w',
-                linewidth=1
-            )
+    #         # Create scatter plot
+    #         plt.scatter(
+    #             x=plot_df['Density'],
+    #             y=plot_df['Q (veh/h)'],
+    #             s=100,
+    #             alpha=0.7,
+    #             edgecolor='w',
+    #             linewidth=1
+    #         )
             
-            # Add regression line
-            sns.regplot(
-                x='Density', 
-                y='Q (veh/h)', 
-                data=plot_df,
-                scatter=False,
-                line_kws={
-                    'color': '#FF6B6B', 
-                    'lw': 2
-                },
-                ci=95,
-                truncate=False
-            )
+    #         # Add regression line
+    #         sns.regplot(
+    #             x='Density', 
+    #             y='Q (veh/h)', 
+    #             data=plot_df,
+    #             scatter=False,
+    #             line_kws={
+    #                 'color': '#FF6B6B', 
+    #                 'lw': 2
+    #             },
+    #             ci=95,
+    #             truncate=False
+    #         )
             
-            # Add title and labels
-            plt.title("Flow-Density Relationship (All Data, Unique Pairs)", 
-                     pad=20, fontsize=16, fontweight='bold')
-            plt.xlabel('Density (veh/km)', labelpad=15, fontsize=14)
-            plt.ylabel('Flow (veh/h)', labelpad=15, fontsize=14)
+    #         # Add title and labels
+    #         plt.title("Flow-Density Relationship (All Data, Unique Pairs)", 
+    #                  pad=20, fontsize=16, fontweight='bold')
+    #         plt.xlabel('Density (veh/km)', labelpad=15, fontsize=14)
+    #         plt.ylabel('Flow (veh/h)', labelpad=15, fontsize=14)
             
-            # Add grid and adjust layout
-            plt.grid(True, linestyle='--', alpha=0.7)
-            plt.tight_layout()
+    #         # Add grid and adjust layout
+    #         plt.grid(True, linestyle='--', alpha=0.7)
+    #         plt.tight_layout()
             
-            # Add a fancy box around the plot
-            ax = plt.gca()
-            for spine in ax.spines.values():
-                spine.set_edgecolor('#888888')
-                spine.set_linewidth(1.5)
+    #         # Add a fancy box around the plot
+    #         ax = plt.gca()
+    #         for spine in ax.spines.values():
+    #             spine.set_edgecolor('#888888')
+    #             spine.set_linewidth(1.5)
             
-            # Save the plot
-            filename = "flow_density_plots/combined_flow_density_unique_pairs.png"
-            plt.savefig(filename, dpi=300, bbox_inches='tight', facecolor='white')
-            plt.close()
+    #         # Save the plot
+    #         filename = "flow_density_plots/combined_flow_density_unique_pairs.png"
+    #         plt.savefig(filename, dpi=300, bbox_inches='tight', facecolor='white')
+    #         plt.close()
             
-            print(f"Success! Saved combined plot with unique pairs: {filename}")
-        else:
-            print("Not enough unique data points (need at least 2) for combined plot")
+    #         print(f"Success! Saved combined plot with unique pairs: {filename}")
+    #     else:
+    #         print("Not enough unique data points (need at least 2) for combined plot")
             
-    except Exception as e:
-        print(f"Error creating combined plot: {str(e)}")
-        plt.close()
+    # except Exception as e:
+    #     print(f"Error creating combined plot: {str(e)}")
+    #     plt.close()
 else:
     print("No data found in any time intervals")
